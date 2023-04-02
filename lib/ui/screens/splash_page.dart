@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:guffadis_chat/ui/config/config.dart';
 
 class SplashPage extends StatelessWidget {
@@ -36,7 +37,7 @@ class SplashPage extends StatelessWidget {
                 ),
               ],
             ),
-          )
+          ).animate().shimmer(delay: 500.ms, duration: 1500.ms).scale()
         ],
       ),
     );
