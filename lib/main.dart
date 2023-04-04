@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:guffadis_chat/ui/config/config.dart';
 import 'package:guffadis_chat/ui/ui.dart';
 
 void main() {
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Guffadis Chat',
       debugShowCheckedModeBanner: false,
+      onGenerateRoute: AppRoute.onGenerateRoute,
       theme: ThemeData(
         primarySwatch: Colors.purple,
         fontFamily: 'Sen',

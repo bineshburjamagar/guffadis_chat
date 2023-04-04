@@ -1,9 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:guffadis_chat/ui/config/config.dart';
+import 'package:guffadis_chat/ui/screens/onboarding_page.dart';
 
-class SplashPage extends StatelessWidget {
+class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
+
+  @override
+  State<SplashPage> createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
+  @override
+  void initState() {
+    super.initState();
+
+    initializeApp();
+  }
+
+  initializeApp() {
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pushReplacementNamed(context, OnboardingPage.routeName);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
