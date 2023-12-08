@@ -9,6 +9,8 @@ class AppRoute {
         return OnboardingPage.route();
       case ChatListPage.routeName:
         return ChatListPage.route();
+      case ChatDetailsPage.routeName:
+        return ChatDetailsPage.route();
 
       default:
         return MaterialPageRoute(

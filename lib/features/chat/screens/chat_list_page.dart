@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:guffadis_chat/features/chat/screens/export_screens.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ChatListPage extends HookConsumerWidget {
@@ -34,26 +35,30 @@ class ChatListPage extends HookConsumerWidget {
         child: ListView.builder(
             padding: const EdgeInsets.only(top: 20.0),
             itemBuilder: (context, index) {
-              return const ListTile(
-                contentPadding: EdgeInsets.symmetric(horizontal: 23.0),
-                leading: CircleAvatar(
+              return ListTile(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 23.0),
+                onTap: () {
+                  Navigator.pushNamed(context, ChatDetailsPage.routeName);
+                },
+                enableFeedback: true,
+                leading: const CircleAvatar(
                   child: Text('RJ'),
                 ),
-                title: Text(
+                title: const Text(
                   'Ram Ji',
                   style: TextStyle(
                     fontSize: 16.0,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                subtitle: Text(
+                subtitle: const Text(
                   'Hello babe',
                   style: TextStyle(
                     color: Colors.grey,
                   ),
                 ),
                 isThreeLine: true,
-                trailing: Text(
+                trailing: const Text(
                   '1 min ago',
                   textAlign: TextAlign.center,
                 ),
