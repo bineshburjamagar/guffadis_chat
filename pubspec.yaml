@@ -16,6 +16,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_launcher_icons: ^0.12.0 
   flutter_animate: ^4.1.1+1
+  hooks_riverpod: ^2.4.9
+  riverpod_annotation: ^2.3.3
+  flutter_hooks: ^0.20.3
 
 flutter_icons:
   android: "launcher_icon"

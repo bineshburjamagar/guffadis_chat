@@ -15,6 +15,7 @@ class OnboardingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        width: double.infinity,
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
           color: AppColors.darkPrimary,
@@ -25,6 +26,16 @@ class OnboardingPage extends StatelessWidget {
               AppColors.darkPrimary,
             ],
           ),
+        ),
+        child: const Column(
+          children: [
+            Text(
+              'data',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ],
         ),
       ),
     );
