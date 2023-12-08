@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:guffadis_chat/features/chat/screens/export_screens.dart';
 import '../screens/onboarding_page.dart';
 
 class AppRoute {
@@ -6,6 +7,8 @@ class AppRoute {
     switch (settings.name) {
       case OnboardingPage.routeName:
         return OnboardingPage.route();
+      case ChatListPage.routeName:
+        return ChatListPage.route();
 
       default:
         return MaterialPageRoute(

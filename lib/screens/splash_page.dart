@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:guffadis_chat/config/config.dart';
-import 'package:guffadis_chat/screens/onboarding_page.dart';
+import 'package:guffadis_chat/features/chat/screens/export_screens.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class _SplashPageState extends State<SplashPage> {
 
   initializeApp() {
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, OnboardingPage.routeName);
+      Navigator.pushReplacementNamed(context, ChatListPage.routeName);
     });
   }
 
