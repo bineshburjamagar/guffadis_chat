@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:guffadis_chat/ui/config/app_colors.dart';
+import 'package:guffadis_chat/config/app_colors.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({Key? key}) : super(key: key);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:guffadis_chat/ui/config/config.dart';
-import 'package:guffadis_chat/ui/ui.dart';
+
+import 'config/app_routes.dart';
+import 'screens/splash_page.dart';
 
 void main() {
   runApp(const MyApp());

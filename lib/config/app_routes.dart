@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:guffadis_chat/ui/screens/onboarding_page.dart';
+import '../screens/onboarding_page.dart';
 
 class AppRoute {
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {

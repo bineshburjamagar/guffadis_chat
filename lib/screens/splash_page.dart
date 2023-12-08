@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:guffadis_chat/ui/config/config.dart';
-import 'package:guffadis_chat/ui/screens/onboarding_page.dart';
+import 'package:guffadis_chat/config/config.dart';
+import 'package:guffadis_chat/screens/onboarding_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
