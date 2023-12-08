@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:guffadis_chat/config/config.dart';
 
-class UserChatText extends StatelessWidget {
-  const UserChatText({
+class UserChatBubble extends StatelessWidget {
+  const UserChatBubble({
     super.key,
   });
 

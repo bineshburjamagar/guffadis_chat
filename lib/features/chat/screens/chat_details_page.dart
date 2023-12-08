@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:guffadis_chat/config/config.dart';
+import 'package:guffadis_chat/features/chat/widgets/export_widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../widgets/user_chat_text.dart';
 
 class ChatDetailsPage extends HookConsumerWidget {
   const ChatDetailsPage({super.key});
@@ -27,11 +25,13 @@ class ChatDetailsPage extends HookConsumerWidget {
           ],
         ),
       ),
+      backgroundColor: Colors.white,
       body: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 23.0),
         child: Column(
           children: [
-            UserChatText(),
+            UserChatBubble(),
+            SenderUserChatBubble(),
           ],
         ),
       ),
