@@ -36,7 +36,15 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'daphne',
     'django.contrib.staticfiles',
+
+
+    # myapps
+    'chat',
+
+    # packages
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -67,7 +75,13 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'root.wsgi.application'
+# WSGI_APPLICATION = 'root.wsgi.application'
+ASGI_APPLICATION = "root.routing.application" #routing.py will be created later
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': "channels.layers.InMemoryChannelLayer"
+        }
+    }
 
 
 # Database
@@ -121,3 +135,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
