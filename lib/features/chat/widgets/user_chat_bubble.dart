@@ -13,7 +13,7 @@ class UserChatBubble extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
         decoration: BoxDecoration(
-          color: AppColors.greenColor,
+          color: AppColors.primaryColor,
           borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(10.0),
               topLeft: Radius.circular(10.0),

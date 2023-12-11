@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:guffadis_chat/config/config.dart';
 import 'package:guffadis_chat/features/chat/widgets/export_widgets.dart';
-import 'package:guffadis_chat/ui.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ChatDetailsPage extends HookConsumerWidget {
@@ -16,7 +13,6 @@ class ChatDetailsPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final chatController = useTextEditingController();
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -41,34 +37,7 @@ class ChatDetailsPage extends HookConsumerWidget {
             ],
           ),
         ),
-        bottomSheet: BottomSheet(
-          backgroundColor: Colors.white,
-          shape: const RoundedRectangleBorder(),
-          onClosing: () {},
-          builder: (context) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Divider(
-                  color: AppColors.lightGreenColor,
-                ),
-                Builder(builder: (context) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CustomTextField(
-                      controller: chatController,
-                      labelText: '',
-                      hintText: 'Write your message',
-                      suffixIcon: chatController.text.isNotEmpty
-                          ? const Text('data')
-                          : null,
-                    ),
-                  );
-                })
-              ],
-            );
-          },
-        ),
+        bottomSheet: const CustomMessageSendButton(),
       ),
     );
   }
