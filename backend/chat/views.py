@@ -1,6 +1,6 @@
 from rest_framework.generics import ListAPIView
-from .models import ChatRoom
-from .serializers import ChatRoomSerializer
+from .models import ChatRoom, Message
+from .serializers import ChatRoomSerializer, MessageSerializer
 
 class ChatRoomList(ListAPIView):
 
@@ -8,10 +8,14 @@ class ChatRoomList(ListAPIView):
 
     def get_queryset(self):
         q = ChatRoom.objects.all()
-        print(q)
+        
 
         return q
 
+class MessageList(ListAPIView):
+    serializer_class = MessageSerializer
     
-
-
+    def get_queryset(self):
+        gg = Message.objects.all()
+        return gg
+    
