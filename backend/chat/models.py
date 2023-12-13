@@ -80,7 +80,7 @@ class User(AbstractBaseUser):
 class ChatRoom(models.Model):
     room_name = models.CharField(max_length=20)
     last_message = models.CharField(max_length=255) 
-    guffadis = models.ManyToMany(User)
+    guffadis = models.ManyToManyField(User)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path
+from .views import ChatRoomList
 
 urlpatterns = [
-    # path("<str:chat_box_name>/", chat_box, name="chat"),
+    path('',  ChatRoomList.as_view(),name='room_list')
 ]
