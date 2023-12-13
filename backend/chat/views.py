@@ -16,6 +16,23 @@ class MessageList(ListAPIView):
     serializer_class = MessageSerializer
     
     def get_queryset(self):
-        gg = Message.objects.all()
-        return gg
+        
+        
+        aa = self.request.GET.get('name')
+
+        try:
+            chat_room = ChatRoom.objects.get(room_name=aa)
+            if chat_room:
+                gg = Message.objects.filter(chat_room=chat_room)
+                print(gg)
+                return gg
+            
+        except:
+            return None
+        
+            
+            
+        
+       
+       
     
