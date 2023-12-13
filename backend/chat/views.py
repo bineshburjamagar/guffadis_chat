@@ -21,7 +21,8 @@ class MessageList(ListAPIView):
     serializer_class = MessageSerializer
 
     def get_queryset(self):
-        gg = Message.objects.all()
+        room_id = self.kwargs["room_id"]
+        gg = Message.objects.filter(chat_room__room_name__contains=room_id)
         return gg
 
 
