@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     # myapps
     'chat',
+    'users',
 
     # packages
     'channels',
@@ -138,7 +139,7 @@ MEDIA_ROOT = BASE_DIR
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = "chat.User"
+AUTH_USER_MODEL = "users.User"
 
 
 
