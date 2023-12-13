@@ -1,6 +1,8 @@
 from rest_framework.generics import ListAPIView
+from rest_framework.views import APIView
 from .models import ChatRoom, Message
 from .serializers import ChatRoomSerializer, MessageSerializer
+from rest_framework.response import Response
 
 class ChatRoomList(ListAPIView):
 
@@ -18,4 +20,13 @@ class MessageList(ListAPIView):
     def get_queryset(self):
         gg = Message.objects.all()
         return gg
-    
+
+
+class GetToken(APIView):
+    def get(self, request, *args, **kwargs):
+        data = {
+            "call_token":"Hello"
+        }
+        return Response(
+            data
+        )
