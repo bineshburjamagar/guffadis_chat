@@ -1,43 +1,113 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
+from channels.db import database_sync_to_async
+from .models import Message, ChatRoom
+from users.models import User
+
 
 class ChatRoomConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        self.chat_box_name = self.scope["url_route"]["kwargs"]["chat_box_name"]
-        self.group_name = "chat_%s" % self.chat_box_name
+        # TODO:using token auth
+        print("connect")
+        user = self.scope.get("user", False)
 
-        await self.channel_layer.group_add(self.group_name, self.channel_name)
+        print(f"connected Userrr {user}")
 
-        await self.accept()
+        if not user:
+            
+            await self.accept()
+            await self.send(
+                text_data=json.dumps(
+                    {"type": "message", "data": {"message": "Not Authenticated.."}}
+                )
+            )
+            await self.send(
+                text_data=json.dumps(
+                    {
+                        "type": "noAuth",
+                    }
+                )
+            )
+            await self.close()
+            return
+        else:
+            print(f"connected {user}")
+
+            receiver = self.scope["url_route"]["kwargs"]["receiver"]
+
+            if int(user) > int(receiver):
+                room_name = f"Adda-For-Guffadi-{user}-Guffadi-{receiver}"
+            else:
+                room_name = f"Adda-For-Guffadi-{receiver}-Guffadi-{user}"
+
+            
+            self.room_group_name = room_name
+
+            # Join room group
+            await self.channel_layer.group_add(self.room_group_name, self.channel_name)
+
+            await self.accept()
 
     async def disconnect(self, close_code):
-        await self.channel_layer.group_discard(self.group_name, self.channel_name)
-    # This function receive messages from WebSocket.
+        # Leave room group
+        print(
+            "'''''''''''''''''''''''''''''''''''''''disconnected'''''''''''''''''''''''''''''''''''''''"
+        )
+        await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
+
+    # Receive message from WebSocket
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
         message = text_data_json["message"]
-        username = text_data_json["username"]
+        receiver = self.scope["url_route"]["kwargs"]["receiver"]
+        user = self.scope.get("user", False)
 
+        # save message to database
+        await self.save_message(user, receiver, self.room_group_name, message)
+
+        # Send message to room group
         await self.channel_layer.group_send(
-            self.group_name,
+            self.room_group_name,
             {
-                "type": "chatbox_message",
+                "type": "chat_message",
                 "message": message,
-                "username": username,
+                "receiver": receiver,
+                "sender": user,
             },
         )
-    # Receive message from room group.
-    async def chatbox_message(self, event):
+
+    # Receive message from room group
+    async def chat_message(self, event):
         message = event["message"]
-        username = event["username"]
-        #send message and username of sender to websocket
+        receiver = event["receiver"]
+        user = event["sender"]
+
+        # Send message to WebSocket
         await self.send(
             text_data=json.dumps(
-                {
-                    "message": message,
-                    "username": username,
-                }
+                {"message": message, "receiver": receiver, "sender": user}
             )
         )
 
-    pass
+    @database_sync_to_async
+    def save_message(self, sender, receiver, room_name, message):
+        print(f"saving message from {sender} to {receiver}")
+        senderObj = User.objects.get(id=sender)
+        receiverObj = User.objects.get(id=receiver)
+
+        if ChatRoom.objects.filter(room_name=room_name).exists():
+            thread = ChatRoom.objects.get(room_name=room_name)
+        else:
+            thread = ChatRoom.objects.create(
+                guffadi_one=senderObj, guffadi_two=receiverObj, room_name=room_name
+            )
+        # thread = ThreadModel.objects.get_or_create(
+        #     room_name=room_name, user=senderObj, receiver=receiverObj)
+        user = self.scope.get("user", False)
+
+        Message.objects.create(
+            sender=senderObj,
+            receiver=receiverObj,
+            message=message,
+            chat_room=thread,
+        )
