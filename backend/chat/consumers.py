@@ -11,7 +11,7 @@
 #         print("connect")
 #         user = self.scope.get("user", False)
 
-#         print(f"connected Userrr {user}")
+#         print(f"connected User {user}")
 
 #         if not user:
             

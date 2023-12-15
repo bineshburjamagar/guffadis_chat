@@ -4,10 +4,20 @@ from .models import ChatRoom, Message
 from .serializers import ChatRoomSerializer, MessageSerializer
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from django.shortcuts import render
+
 
 from livekit import api as liveKitApi
 from django.conf import settings
 
+
+
+def index(request):
+    return render(request, "index.html")
+
+
+def room(request, room_name):
+    return render(request, "room.html", {"room_name": room_name})
 
 class ChatRoomList(ListAPIView):
     serializer_class = ChatRoomSerializer
@@ -24,7 +34,6 @@ class MessageList(ListAPIView):
         room_id = self.kwargs["room_id"]
         gg = Message.objects.filter(chat_room__room_name__contains=room_id)
         return gg
-
 
 class GetCallToken(APIView):
     permission_classes = [IsAuthenticated,]

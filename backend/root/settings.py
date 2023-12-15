@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 import environ
 
 env = environ.Env()
@@ -156,3 +157,7 @@ AUTH_USER_MODEL = "users.User"
 
 LIVEKIT_API_SECRET = env("LIVEKIT_API_SECRET")
 LIVEKIT_API_KEY = env("LIVEKIT_API_KEY")
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=365),
+}
